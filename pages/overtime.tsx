@@ -34,7 +34,10 @@ export default function Overtime() {
       <div>Work for overtime</div>
 
       {all.map(r => (
-        <div key={r._id}>{`${r.startTime} to ${r.endTime}`}</div>
+        <div key={r._id} >
+          <div>{`${r.startTime} to ${r.endTime}`}</div>
+          <div>{`worked ${dayjs(r.endTime).diff(r.startTime, 'minute') / 60.0} hour(s)`}</div>
+        </div>
       ))}
 
       <form onSubmit={saveTime}>

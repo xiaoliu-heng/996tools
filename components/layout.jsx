@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { CircuitBoard } from "./svgs/CircuitBoard";
 
 export default function Layout({ children }) {
   return (
@@ -18,6 +19,7 @@ export default function Layout({ children }) {
       </main>
 
       <footer></footer>
+      <CircuitBoard className="w-screen h-screen absolute top-0 bottom-0" />
     </div>
   );
 }
