@@ -4,6 +4,7 @@ export default {
     dbVersion: 1,
     collections: {
       overtime: ["remark", "date"],
+      baseinfo: ["name"],
     },
   },
 };

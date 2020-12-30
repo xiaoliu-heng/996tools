@@ -8,16 +8,16 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <div className="w-full text-center font-bold text-2xl text-gray-900 dark:text-gray-300">
+      <main className="h-screen">
+        <div className="w-full text-center font-bold text-xl bg-indigo-500 dark:bg-indigo-700 text-gray-900 dark:text-gray-300 sticky top-0 left-0 py-1">
           <span>Welcome to join 996</span>
           <sup>icu</sup>
         </div>
 
-        <div className="container mx-auto text-gray-900 dark:text-gray-300">{children}</div>
+        <div className="container mx-auto text-gray-900 dark:text-gray-300 px-4">
+          {children}
+        </div>
       </main>
-
-      <footer></footer>
     </div>
   );
 }
