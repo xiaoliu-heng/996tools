@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { CircuitBoard } from "./svgs/CircuitBoard";
 
 export default function Layout({ children }) {
   return (
@@ -10,16 +9,15 @@ export default function Layout({ children }) {
       </Head>
 
       <main>
-        <div className="w-full text-center font-bold text-2xl">
+        <div className="w-full text-center font-bold text-2xl text-gray-900 dark:text-gray-300">
           <span>Welcome to join 996</span>
           <sup>icu</sup>
         </div>
 
-        <div className="container mx-auto">{children}</div>
+        <div className="container mx-auto text-gray-900 dark:text-gray-300">{children}</div>
       </main>
 
       <footer></footer>
-      <CircuitBoard className="w-screen h-screen absolute top-0 bottom-0" />
     </div>
   );
 }

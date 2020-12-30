@@ -22,8 +22,9 @@ export default function Overtime() {
 
   const saveTime = async (e: FormEvent) => {
     e.preventDefault();
+    if (startTime === endTime) return;
     await db.insert({ startTime, endTime });
-    refreshRecords();
+    await refreshRecords();
   }
 
   return (
@@ -33,12 +34,14 @@ export default function Overtime() {
       </Head>
       <div>Work for overtime</div>
 
-      {all.map(r => (
-        <div key={r._id} >
-          <div>{`${r.startTime} to ${r.endTime}`}</div>
-          <div>{`worked ${dayjs(r.endTime).diff(r.startTime, 'minute') / 60.0} hour(s)`}</div>
-        </div>
-      ))}
+      <div className="space-y-4 my-6 max-h-96">
+        {all.map(r => (
+          <div key={r._id} className="bg-white dark:bg-gray-500 shadow rounded-lg px-4 py-2" >
+            <div>{`${r.startTime} to ${r.endTime}`}</div>
+            <div className="text-sm">{`worked ${dayjs(r.endTime).diff(r.startTime, 'minute') / 60.0} hour(s)`}</div>
+          </div>
+        ))}
+      </div>
 
       <form onSubmit={saveTime}>
         <input type="datetime-local" required value={startTime} onChange={e => setStartTime(e.target.value)} />
