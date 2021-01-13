@@ -9,8 +9,8 @@ export default function Layout({ children }) {
       </Head>
 
       <main className="h-screen">
-        <div className="w-full text-center font-bold text-xl bg-indigo-500 dark:bg-indigo-700 text-gray-900 dark:text-gray-300 sticky top-0 left-0 py-1">
-          <span>Welcome to join 996</span>
+        <div className="w-full text-center font-bold text-xl bg-indigo-500 dark:bg-indigo-700 text-gray-900 dark:text-gray-300 sticky top-0 left-0 py-1 h-12">
+          <span className="leading-10">Welcome to join 996</span>
           <sup>icu</sup>
         </div>
 
