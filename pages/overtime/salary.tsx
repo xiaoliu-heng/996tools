@@ -45,7 +45,7 @@ const Salary = ({}) => {
   return (
     <div className="py-4">
       <div className="leading-normal font-semibold">Base info</div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-3 md:grid-cols-3 gap-2">
         <div className="flex justify-between flex-col bg-white dark:bg-gray-500 px-4 py-2 rounded-lg shadow">
           <p className="inline-block">基本工资</p>
           {basicSalary.focus ? (
@@ -69,12 +69,9 @@ const Salary = ({}) => {
             </p>
           )}
         </div>
-        <div className="flex justify-between flex-col bg-white dark:bg-gray-500 px-4 py-2 rounded-lg shadow">
-          <p className="inline-block">日薪</p>
-          <p>{(basicSalary.salary / 21.75).toFixed(2) || ""}</p>
-        </div>
-        <div className="flex justify-between flex-col bg-white dark:bg-gray-500 px-4 py-2 rounded-lg shadow">
-          <p className="inline-block">平时加班时薪</p>
+
+        <div className="flex justify-between flex-col row-span-2 bg-white dark:bg-gray-500 px-4 py-2 rounded-lg shadow">
+          <p className="inline-block">加班时薪</p>
           {weekdaysOvertimePay.focus ? (
             <input
               type="number"
@@ -91,16 +88,61 @@ const Salary = ({}) => {
               }}
             />
           ) : (
-            <p
-              onClick={() =>
-                setWeekdaysOvertimePay({ ...weekdaysOvertimePay, focus: true })
-              }
-            >
-              {weekdaysOvertimePay.salary}
-            </p>
+            <div className="w-full">
+              <span className="text-sm">平时</span>
+              <sub>x1.5</sub>
+              <span
+                onClick={() =>
+                  setWeekdaysOvertimePay({
+                    ...weekdaysOvertimePay,
+                    focus: true,
+                  })
+                }
+              >
+                {weekdaysOvertimePay.salary}
+              </span>
+            </div>
           )}
+
+          <div className="w-full">
+            <span className="text-sm">周末</span>
+            <sub>x2</sub>
+            {weekendsOvertimePay.focus ? (
+              <input
+                type="number"
+                pattern="\d{0,6}\/.\d{2}"
+                min={1}
+                value={weekendsOvertimePay.salary.toFixed(2) || ""}
+                onBlur={() => saveSalary(SalaryType.Weekends)}
+                onChange={(e) => {
+                  if (e.target.value.split(".")[0].length < 7)
+                    setWeekendsOvertimePay({
+                      ...weekendsOvertimePay,
+                      salary: Number(Number(e.target.value).toFixed(2)),
+                    });
+                }}
+              />
+            ) : (
+              <span
+                onClick={() =>
+                  setWeekendsOvertimePay({
+                    ...weekendsOvertimePay,
+                    focus: true,
+                  })
+                }
+              >
+                {weekendsOvertimePay.salary}
+              </span>
+            )}
+          </div>
         </div>
+
         <div className="flex justify-between flex-col bg-white dark:bg-gray-500 px-4 py-2 rounded-lg shadow">
+          <p className="inline-block">时薪</p>
+          <p>{(basicSalary.salary / 21.75 / 8).toFixed(2) || ""}</p>
+        </div>
+
+        {/* <div className="flex justify-between flex-col bg-white dark:bg-gray-500 px-4 py-2 rounded-lg shadow">
           <p className="inline-block">周末加班时薪</p>
           {weekendsOvertimePay.focus ? (
             <input
@@ -126,7 +168,7 @@ const Salary = ({}) => {
               {weekendsOvertimePay.salary}
             </p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
